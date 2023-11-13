@@ -2,25 +2,18 @@ import {
   mobile,
   backend,
   web,
-  javascript,
-  typescript,
   reactjs,
   pokemon,
-  nodejs,
   python,
   opencv,
   mongodb,
-  processing,
   generative_music,
   pytorch,
-  git,
   tensorflow,
   docker,
   whitelion,
   deepblue,
   alpr,
-  tripguide,
-  threejs,
 } from "../assets";
 
 export const navLinks = [
@@ -72,39 +65,13 @@ const technologies = [
     icon: python,
   },
   {
-    name: "JavaScript",
-    icon: javascript,
-  },
-  {
-    name: "TypeScript",
-    icon: typescript,
-  },
-  {
     name: "React JS",
     icon: reactjs,
-  },
-
-  {
-    name: "Processing",
-    icon: processing,
-  },
-  {
-    name: "Node JS",
-    icon: nodejs,
   },
   {
     name: "MongoDB",
     icon: mongodb,
   },
-  {
-    name: "Three JS",
-    icon: threejs,
-  },
-  {
-    name: "git",
-    icon: git,
-  },
-
   {
     name: "docker",
     icon: docker,
