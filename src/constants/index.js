@@ -48,34 +48,7 @@ const services = [
 ];
 
 const technologies = [
-  {
-    name: "PyTorch",
-    icon: pytorch,
-  },
-  {
-    name: "Tensorflow",
-    icon: tensorflow,
-  },
-  {
-    name: "OpenCV",
-    icon: opencv,
-  },
-  {
-    name: "Python",
-    icon: python,
-  },
-  {
-    name: "React JS",
-    icon: reactjs,
-  },
-  {
-    name: "MongoDB",
-    icon: mongodb,
-  },
-  {
-    name: "docker",
-    icon: docker,
-  },
+
 ];
 
 const experiences = [
