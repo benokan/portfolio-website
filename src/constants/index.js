@@ -53,18 +53,20 @@ const technologies = [
 
 const experiences = [
   {
-    title: "Web Developer",
+    title: "Data Scientist & Web Developer",
     company_name: "The White Lion",
     icon: whitelion,
     iconBg: "#383E56",
-    date: "July 2020 - July 2021",
+    date: "July 2020 - September 2022",
     points: [
       "Developed the website of the White Lion",
       "SEO & Web Crawling for Marketing Campaigns with Python, Selenium, and BeautifulSoup",
+      "Developed of a predictive modeling system to forecast market trends.",
+      "Designed and implemented a real-time analytics dashboard for monitoring key performance indicators, enhancing decision-making capabilities across departments."
     ],
   },
   {
-    title: "Web & Mobile Developer, Data Scientist",
+    title: "Fullstack Developer & Data Scientist",
     company_name: "Deep Blue",
     icon: deepblue,
     iconBg: "#E6DEDD",
@@ -73,6 +75,7 @@ const experiences = [
       "Developing and maintaining web and mobile applications using Next.js, Python, MongoDB, Docker, and other technologies.",
       "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
       "Participating in code reviews and providing constructive feedback to other developers.",
+      "Contrubuting to the development of EU funded data science and machine learning projects."
     ],
   },
 ];
