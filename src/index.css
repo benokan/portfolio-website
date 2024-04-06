@@ -115,10 +115,9 @@
 }
 
 .bg-dark-blue {
-  background-color: #000913; /* Dark blue color */
+  background-color: #000913;
 }
 
-/* canvas- styles */
 .canvas-loader {
   font-size: 10px;
   width: 1em;
