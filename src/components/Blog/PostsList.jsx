@@ -7,7 +7,7 @@ export const PostsList = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const tableId = "df3d54a7716e4705b6b0cd4cacbc23e9";
+    const tableId = import.meta.env.VITE_APP_TABLE_ID;
     const fetchPosts = async () => {
       const response = await fetch(`https://notion-api.splitbee.io/v1/table/${tableId}`);
       if (!response.ok) {
@@ -17,7 +17,6 @@ export const PostsList = () => {
       const data = await response.json();
       setPosts(data);
     };
-
     fetchPosts();
   }, []);
 
