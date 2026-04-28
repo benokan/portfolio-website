@@ -72,7 +72,7 @@ const Works = () => {
     <>
       <motion.div variants={textVariant()}>
         <p className={`${styles.sectionSubText} `}>My work</p>
-        <h2 className={`${styles.sectionHeadText}`}>Projects.</h2>
+        <h2 className={`${styles.sectionHeadText}`}>Projects</h2>
       </motion.div>
 
       <div className='w-full flex'>
@@ -85,6 +85,13 @@ const Works = () => {
           links to code repositories and live demos in it. It reflects my
           ability to solve complex problems, work with different technologies,
           and manage projects effectively.
+          <br></br>
+          <br></br>
+          The projects highlighted here represent just a fraction of my work. 
+          For a comprehensive view of all my projects, including code repositories and live demos, 
+          I invite you to visit my <a href="https://github.com/benokan" target="_blank" rel="noopener noreferrer" className='text-blue-500 hover:text-blue-700'>GitHub page</a>,
+          and my <a href="https://www.linkedin.com/in/benokan/" target="_blank" rel="noopener noreferrer" className='text-blue-500 hover:text-blue-700'>LinkedIn page</a>.
+          
         </motion.p>
       </div>
 
