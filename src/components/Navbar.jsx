@@ -33,11 +33,9 @@ export const Navbar = () => {
           className={`${active === nav.title ? "text-white" : "text-secondary"} hover:text-white text-[18px] font-medium cursor-pointer`}
           onClick={() => setActive(nav.title)}
         >
-          {nav.title === "Blog" ? (
-            <Link to="/blog">{nav.title}</Link>
-          ) : (
+          
             <a href={`/#${nav.id}`}>{nav.title}</a>
-          )}
+          
         </li>
       ))}
     </ul>
@@ -64,19 +62,13 @@ export const Navbar = () => {
               onClick={() => {
                 setToggle(!toggle);
                 setActive(nav.title);
-                if (nav.title !== "Blog") {
                   const section = document.querySelector(`#${nav.id}`);
                   if (section) {
                     section.scrollIntoView({ behavior: 'smooth' });
                   }
-                }
               }}
             >
-              {nav.title === "Blog" ? (
-                <Link to="/blog">{nav.title}</Link>
-              ) : (
                 <a href={`#${nav.id}`}>{nav.title}</a>
-              )}
             </li>
           ))}
         </ul>

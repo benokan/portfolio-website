@@ -1,9 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import { About, Contact, Experience, Hero, Navbar, Tech, Works, StarsCanvas } from "./components";
-// Assuming PostsList and Post are correctly placed under ./components/Blog/
-import { PostsList } from "./components/Blog/PostsList";
-import { Post } from "./components/Blog/Post"; 
 
 const App = () => {
   return (
@@ -25,11 +22,6 @@ const App = () => {
             </div>
           </div>
         } />
-        {/* Blog route for listing posts */}
-        <Route path="/blog" element={<PostsList />} />
-        {/* Route for viewing an individual post */}
-        <Route path="/blog/post/:pageId" element={<Post />} />
-        {/* You can add more routes here */}
       </Routes>
     </BrowserRouter>
   );
