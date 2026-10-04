@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <script>
+      try {
+        if (localStorage.getItem("theme") === "dark") {
+          document.documentElement.classList.add("dark");
+        }
+      } catch (e) {}
+    </script>
+    <title>Page not found · Benokan Kafkas</title>
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #f7f7f4;
+        --text: #1c1917;
+        --muted: #6b6560;
+        --accent: #0f766e;
+        color-scheme: light;
+      }
+
+      :root.dark {
+        --bg: #0d1214;
+        --text: #f2f4f3;
+        --muted: #8f9997;
+        --accent: #5eead4;
+        color-scheme: dark;
+      }
+
+      * {
+        margin: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 1.5rem;
+        background: var(--bg);
+        color: var(--text);
+        font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      main {
+        max-width: 28rem;
+      }
+
+      .code {
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      h1 {
+        margin-top: 0.75rem;
+        font-size: 2rem;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+      }
+
+      p {
+        margin-top: 0.75rem;
+        line-height: 1.6;
+        color: var(--muted);
+      }
+
+      a {
+        display: inline-block;
+        margin-top: 1.5rem;
+        color: var(--accent);
+        font-weight: 500;
+        text-decoration: underline;
+        text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
+        text-underline-offset: 4px;
+      }
+
+      a:hover,
+      a:focus-visible {
+        text-decoration-color: currentColor;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p class="code">404</p>
+      <h1>Page not found</h1>
+      <p>This page doesn't exist or has moved.</p>
+      <a href="/">Back to benokan.com</a>
+    </main>
+  </body>
+</html>
