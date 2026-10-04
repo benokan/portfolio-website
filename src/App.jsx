@@ -1,6 +1,7 @@
 import Experience from "./components/Experience";
 import Projects from "./components/Projects";
 import Section from "./components/Section";
+import ThemeToggle from "./components/ThemeToggle";
 import { about, links, profile } from "./content";
 
 const App = () => (
@@ -14,6 +15,7 @@ const App = () => (
           {profile.tagline}
         </p>
       </div>
+      <ThemeToggle />
     </header>
 
     <main>
