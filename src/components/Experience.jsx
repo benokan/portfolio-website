@@ -2,20 +2,24 @@ import { experience } from "../content";
 import Section from "./Section";
 
 const Experience = () => (
-  <Section title='Experience'>
-    <ul className='space-y-8'>
+  <Section id='experience' title='Experience'>
+    <ol className='rows space-y-12'>
       {experience.map((job) => (
-        <li key={job.company}>
-          <div className='flex flex-wrap items-baseline justify-between gap-x-4'>
-            <h3 className='font-medium'>
+        <li key={job.company} className='row sm:grid sm:grid-cols-[9.5rem_1fr] sm:gap-6'>
+          <p className='mt-1 text-xs font-medium uppercase tracking-wide text-muted sm:whitespace-nowrap'>
+            {job.period}
+          </p>
+          <div className='mt-2 sm:mt-0'>
+            <h3 className='row-title font-medium'>
               {job.role} <span className='text-muted'>· {job.company}</span>
             </h3>
-            <p className='text-sm text-muted'>{job.period}</p>
+            <p className='mt-2 text-[15px] leading-relaxed text-soft'>
+              {job.summary}
+            </p>
           </div>
-          <p className='mt-2 leading-relaxed text-soft'>{job.summary}</p>
         </li>
       ))}
-    </ul>
+    </ol>
   </Section>
 );
 
