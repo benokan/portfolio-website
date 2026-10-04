@@ -5,27 +5,27 @@ export const profile = {
 };
 
 export const about =
-  "I'm a software engineer with a background in AI. I studied Software Engineering at Izmir University of Economics and earned an MSc in Artificial Intelligence and Robotics at Sapienza University of Rome. These days I mostly work across the full stack — product, backend and infrastructure — and I enjoy taking a product from an empty repository to something people rely on.";
+  "I'm a software engineer with a background in AI. I studied Software Engineering at Izmir University of Economics and earned an MSc in Artificial Intelligence and Robotics at Sapienza University of Rome. These days I mostly work across the full stack, from product to backend and infrastructure, and I enjoy taking a product from an empty repository to something people rely on.";
 
 export const experience = [
   {
     role: "Founding Engineer, now Team Lead",
     company: "Credizen SRL",
-    period: "Nov 2024 – Present",
+    period: "Nov 2024 - Present",
     summary:
       "Joined as the first engineer on Zenso, a loan-matching platform for the Italian market. Now leading the engineering team as the product grows.",
   },
   {
     role: "Fullstack Developer & Data Scientist",
     company: "Deep Blue",
-    period: "Sep 2022 – Nov 2024",
+    period: "Sep 2022 - Nov 2024",
     summary:
       "Built web and mobile applications with Next.js, Python, MongoDB and Docker, and contributed to EU-funded data science and machine learning projects.",
   },
   {
     role: "Data Scientist & Web Developer",
     company: "The White Lion",
-    period: "Jul 2020 – Sep 2022",
+    period: "Jul 2020 - Sep 2022",
     summary:
       "Built the company website, a forecasting model for market trends and a real-time KPI dashboard, plus web crawling for marketing campaigns.",
   },
