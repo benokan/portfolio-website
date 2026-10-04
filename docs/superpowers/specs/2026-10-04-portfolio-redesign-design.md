@@ -84,8 +84,8 @@ enjoy taking a product from an empty repository to something people rely on.
 ### Experience
 
 **Founding Engineer, now Team Lead** — Credizen SRL · Nov 2024 – Present
-Joined as the first engineer and built the Zenso loan application end to end.
-Now leading the engineering team as the product grows.
+Joined as the first engineer on Zenso, a loan-matching platform for the
+Italian market. Now leading the engineering team as the product grows.
 
 **Fullstack Developer & Data Scientist** — Deep Blue · Sep 2022 – Nov 2024
 Built web and mobile applications with Next.js, Python, MongoDB and Docker,
@@ -99,8 +99,7 @@ real-time KPI dashboard, plus web crawling for marketing campaigns.
 
 **Zenso** → https://zensoapp.com
 An independent loan-matching platform for the Italian market. It compares
-offers from partner banks and finds a suitable personal loan in minutes. I
-wrote the application and lead its engineering.
+offers from partner banks and finds a suitable personal loan in minutes.
 
 **License plate detection in the wild** →
 https://github.com/benokan/alpr-unconstrained-py3-updated-and-optimized
