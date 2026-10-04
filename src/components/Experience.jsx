@@ -1,4 +1,5 @@
 import { experience } from "../content";
+import AiText from "./AiText";
 import Section from "./Section";
 
 const Experience = () => (
@@ -11,10 +12,10 @@ const Experience = () => (
           </p>
           <div className='mt-2 sm:mt-0'>
             <h3 className='row-title font-medium'>
-              {job.role} <span className='text-muted'>· {job.company}</span>
+              <AiText text={job.role} density={0.3} /> <span className='text-muted'>· {job.company}</span>
             </h3>
             <p className='mt-2 text-[15px] leading-relaxed text-soft'>
-              {job.summary}
+              <AiText text={job.summary} />
             </p>
           </div>
         </li>

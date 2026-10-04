@@ -1,4 +1,5 @@
 import { projects } from "../content";
+import AiText from "./AiText";
 import Section from "./Section";
 
 const Projects = () => (
@@ -24,7 +25,7 @@ const Projects = () => (
               </a>
             </h3>
             <p className='mt-2 text-[15px] leading-relaxed text-soft'>
-              {project.description}
+              <AiText text={project.description} />
             </p>
           </div>
         </li>

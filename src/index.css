@@ -244,3 +244,560 @@ body {
   .fade-in { animation: none; }
   .row, .row-title, .arrow, .nav-line, .nav-link { transition: none; }
 }
+
+/* ------------------------------------------------------------------------
+   AI mode: a deliberately unhinged parody of the AI hype cycle.
+   Everything below only applies while <html> has the "ai" class.
+   ------------------------------------------------------------------------ */
+
+:root.ai {
+  --bg: #0b0118;
+  --card: rgba(255, 255, 255, 0.06);
+  --card-shadow: 0 0 0 1px rgba(255, 0, 200, 0.5), 0 0 30px rgba(140, 80, 255, 0.5);
+  --text: #ffffff;
+  --soft: #e9ddff;
+  --muted: #c4a8ff;
+  --line: #ff3fd1;
+  --accent: #00ffd0;
+  --glow: rgba(255, 0, 200, 0.25);
+  color-scheme: dark;
+}
+
+:root.ai body {
+  overflow-x: hidden;
+  padding-top: 2.25rem;
+}
+
+/* A filter on body would break position: fixed, so the color cycling
+   background lives on its own layer. */
+:root.ai body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(255, 0, 200, 0.28), transparent 40%),
+    radial-gradient(circle at 85% 30%, rgba(0, 255, 208, 0.22), transparent 40%),
+    radial-gradient(circle at 50% 90%, rgba(120, 60, 255, 0.35), transparent 50%);
+  animation: ai-hue 8s linear infinite;
+}
+
+:root.ai h1 {
+  background: linear-gradient(90deg, #ff3fd1, #8c50ff, #00ffd0, #ffe600, #ff3fd1);
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: ai-slide 3s linear infinite, ai-wobble 2.5s ease-in-out infinite;
+}
+
+:root.ai .section-heading {
+  color: #ffe600;
+  text-shadow: 0 0 12px #ff3fd1;
+}
+
+:root.ai .row {
+  animation: ai-shake 0.35s ease-in-out infinite;
+  animation-play-state: paused;
+}
+
+:root.ai .row:nth-child(2n) {
+  animation-play-state: running;
+  animation-duration: 0.5s;
+}
+
+:root.ai .row:hover {
+  animation-play-state: running;
+  animation-duration: 0.12s;
+}
+
+:root.ai .ai-toggle {
+  color: #0b0118;
+  background: linear-gradient(90deg, #ff3fd1, #00ffd0);
+  border-color: transparent;
+  box-shadow: 0 0 18px #ff3fd1;
+}
+
+.ai-token {
+  display: inline-block;
+  padding: 0 0.35em;
+  border-radius: 0.4em;
+  font-size: 0.8em;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #0b0118;
+  background: linear-gradient(90deg, #ff3fd1, #8c50ff, #00ffd0);
+  background-size: 200% 100%;
+  box-shadow: 0 0 10px rgba(255, 63, 209, 0.6);
+  animation: ai-pop 300ms ease-out both, ai-slide 2s linear infinite;
+}
+
+.ai-badge {
+  display: inline-block;
+  margin-left: 0.3em;
+  padding: 0 0.3em;
+  border-radius: 0.3em;
+  font-size: 0.55em;
+  vertical-align: super;
+  color: #0b0118;
+  background: #ffe600;
+  -webkit-text-fill-color: #0b0118;
+  animation: ai-pulse 0.8s ease-in-out infinite;
+}
+
+/* Ticker */
+.ai-ticker {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 60;
+  overflow: hidden;
+  padding: 0.5rem 0;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+  color: #0b0118;
+  background: linear-gradient(90deg, #ffe600, #ff3fd1, #00ffd0, #ffe600);
+  background-size: 300% 100%;
+  animation: ai-slide 4s linear infinite;
+}
+
+.ai-ticker-track {
+  display: inline-flex;
+  animation: ai-marquee 30s linear infinite;
+}
+
+/* Cursor trail */
+.ai-trail-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.ai-trail {
+  position: absolute;
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: hsl(var(--hue) 100% 65%);
+  text-shadow: 0 0 8px currentColor;
+  transform: translate(-50%, -50%);
+  animation: ai-float 800ms ease-out forwards;
+}
+
+/* Popups */
+.ai-banner-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  pointer-events: none;
+}
+
+.ai-banner {
+  position: absolute;
+  width: min(340px, 88vw);
+  padding: 1rem 1.1rem;
+  border-radius: 0.9rem;
+  pointer-events: auto;
+  transform: rotate(var(--rot));
+  transition: transform 200ms ease;
+  animation: ai-banner-in 380ms cubic-bezier(0.2, 1.6, 0.4, 1) backwards;
+}
+
+/* Reading a popup straightens it, lifts it above the others and pauses the
+   chaos (see AiChaos). */
+.ai-banner:hover,
+.ai-banner:focus-within {
+  z-index: 10;
+  transform: rotate(0) scale(1.05);
+}
+
+.ai-banner-title {
+  font-weight: 800;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ai-banner-body {
+  margin-top: 0.3rem;
+  padding-right: 1.25rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.ai-banner-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.8rem;
+}
+
+.ai-banner-cta,
+.ai-banner-decline {
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.ai-banner-cta {
+  color: #0b0118;
+  background: #ffe600;
+}
+
+.ai-banner-decline {
+  opacity: 0.7;
+  text-decoration: underline;
+}
+
+.ai-banner-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.6rem;
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+.ai-banner--gradient {
+  color: #fff;
+  background: linear-gradient(135deg, #ff3fd1, #8c50ff 60%, #00b3ff);
+  box-shadow: 0 20px 50px -10px rgba(255, 63, 209, 0.7);
+}
+
+.ai-banner--terminal {
+  color: #00ff6a;
+  background: #020a04;
+  border: 1px solid #00ff6a;
+  font-family: ui-monospace, Menlo, monospace;
+  box-shadow: 0 0 24px rgba(0, 255, 106, 0.45);
+}
+
+.ai-banner--terminal .ai-banner-cta {
+  background: #00ff6a;
+}
+
+.ai-banner--warning {
+  color: #1a1400;
+  background: #ffe600;
+  border: 6px solid #1a1400;
+  border-image: repeating-linear-gradient(45deg, #1a1400 0 8px, #ffe600 8px 16px) 6;
+  box-shadow: 8px 8px 0 #1a1400;
+}
+
+.ai-banner--warning .ai-banner-cta {
+  color: #ffe600;
+  background: #1a1400;
+}
+
+.ai-banner--retro {
+  color: #000;
+  background: #c0c0c0;
+  border: 2px outset #fff;
+  border-radius: 0;
+  font-family: "MS Sans Serif", Tahoma, sans-serif;
+  box-shadow: 4px 4px 0 #000;
+}
+
+.ai-banner--retro .ai-banner-title {
+  margin: -1rem -1.1rem 0.5rem;
+  padding: 0.3rem 0.6rem;
+  color: #fff;
+  background: linear-gradient(90deg, #000080, #1084d0);
+}
+
+.ai-banner--retro .ai-banner-close {
+  color: #fff;
+  top: 0.25rem;
+}
+
+.ai-banner--retro .ai-banner-cta {
+  border: 2px outset #fff;
+  border-radius: 0;
+  background: #c0c0c0;
+}
+
+.ai-banner--glass {
+  color: #fff;
+  background: rgba(30, 10, 60, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(14px) saturate(180%);
+  box-shadow: 0 0 40px rgba(0, 255, 208, 0.4);
+}
+
+/* AGI announcement */
+.ai-agi {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  text-align: center;
+  font-size: clamp(2.5rem, 12vw, 9rem);
+  font-weight: 900;
+  line-height: 1;
+  color: #fff;
+  text-shadow: 0 0 30px #ff3fd1, 0 0 60px #00ffd0;
+  animation: ai-flash 200ms steps(2) infinite;
+}
+
+.ai-agi-sub {
+  margin-top: 0.5rem;
+  font-size: 0.25em;
+  font-weight: 600;
+  opacity: 0.8;
+}
+
+.ai-exit {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 100;
+  padding: 0.6rem 1rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #0b0118;
+  background: #fff;
+  box-shadow: 0 0 0 3px #ff3fd1, 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes ai-hue {
+  to { filter: hue-rotate(360deg); }
+}
+
+@keyframes ai-slide {
+  to { background-position: 300% 0; }
+}
+
+@keyframes ai-marquee {
+  to { transform: translateX(-50%); }
+}
+
+@keyframes ai-wobble {
+  0%, 100% { transform: rotate(-1.5deg) scale(1); }
+  50% { transform: rotate(1.5deg) scale(1.04); }
+}
+
+@keyframes ai-shake {
+  0%, 100% { transform: translate(0, 0) rotate(0); }
+  25% { transform: translate(-2px, 1px) rotate(-0.4deg); }
+  75% { transform: translate(2px, -1px) rotate(0.4deg); }
+}
+
+@keyframes ai-pop {
+  from { transform: scale(0.3); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes ai-pulse {
+  50% { transform: scale(1.2); }
+}
+
+@keyframes ai-float {
+  to { transform: translate(-50%, -260%) scale(1.6); opacity: 0; }
+}
+
+@keyframes ai-banner-in {
+  from { transform: rotate(var(--rot)) scale(0.2); opacity: 0; }
+  to { transform: rotate(var(--rot)) scale(1); opacity: 1; }
+}
+
+@keyframes ai-flash {
+  0% { background: rgba(255, 63, 209, 0.35); }
+  100% { background: rgba(0, 255, 208, 0.25); }
+}
+
+/* Desktop dancer: drifts back and forth along the bottom of the screen. */
+.ai-dancer-track {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 85;
+  width: var(--dancer-w);
+  --dancer-w: 130px;
+  animation: ai-dancer-walk 26s ease-in-out infinite alternate;
+}
+
+@media (max-width: 639px) {
+  .ai-dancer-track { --dancer-w: 92px; }
+}
+
+.ai-dancer {
+  position: relative;
+  cursor: pointer;
+  filter: drop-shadow(0 0 12px rgba(255, 63, 209, 0.6));
+}
+
+.ai-dancer.is-spinning {
+  animation: ai-dancer-spin 700ms ease-in-out;
+}
+
+.ai-dancer-svg {
+  display: block;
+  width: 100%;
+  overflow: visible;
+}
+
+.ai-dancer-svg g {
+  transform-box: view-box;
+}
+
+/* The groove: a bounce step at 120 bpm. One cycle of the legs, hips, torso
+   and head is two beats (1s); the arms run over a full bar (2s). On each beat
+   the knees bend and the hips dip; between beats the weight shifts to one
+   leg and the other knee lifts. */
+.ai-dancer-svg [class^="ai-d-"] {
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1);
+}
+
+.ai-d-hips { animation-name: ai-d-hips; }
+.ai-d-shadow { animation-name: ai-d-shadow; transform-origin: 80px 234px; }
+.ai-d-thigh-l { animation-name: ai-d-thigh-l; }
+.ai-d-shin-l { animation-name: ai-d-shin-l; }
+.ai-d-thigh-r { animation-name: ai-d-thigh-r; }
+.ai-d-shin-r { animation-name: ai-d-shin-r; }
+.ai-d-torso { animation-name: ai-d-torso; animation-delay: -0.04s; }
+.ai-d-head { animation-name: ai-d-head; animation-delay: -0.92s; }
+.ai-dancer-svg .ai-d-upper-r { animation: ai-d-upper-r 2s infinite ease-in-out; }
+.ai-dancer-svg .ai-d-fore-r { animation: ai-d-fore-r 2s infinite ease-in-out; }
+.ai-dancer-svg .ai-d-upper-l { animation: ai-d-upper-l 2s infinite ease-in-out; }
+.ai-dancer-svg .ai-d-fore-l { animation: ai-d-fore-l 2s infinite ease-in-out; }
+
+@keyframes ai-d-hips {
+  0%, 50%, 100% { transform: translate(0, 5px); }
+  25% { transform: translate(-5px, -1px); }
+  75% { transform: translate(5px, -1px); }
+}
+
+@keyframes ai-d-shadow {
+  0%, 50%, 100% { transform: scaleX(1.05); }
+  25%, 75% { transform: scaleX(0.9); }
+}
+
+@keyframes ai-d-thigh-l {
+  0%, 50%, 100% { transform: rotate(20deg); }
+  25% { transform: rotate(-3deg); }
+  75% { transform: rotate(48deg); }
+}
+
+@keyframes ai-d-shin-l {
+  0%, 50%, 100% { transform: rotate(-40deg); }
+  25% { transform: rotate(0deg); }
+  75% { transform: rotate(-90deg); }
+}
+
+@keyframes ai-d-thigh-r {
+  0%, 50%, 100% { transform: rotate(-20deg); }
+  25% { transform: rotate(-48deg); }
+  75% { transform: rotate(3deg); }
+}
+
+@keyframes ai-d-shin-r {
+  0%, 50%, 100% { transform: rotate(40deg); }
+  25% { transform: rotate(90deg); }
+  75% { transform: rotate(0deg); }
+}
+
+@keyframes ai-d-torso {
+  0%, 50%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(6deg); }
+  75% { transform: rotate(-6deg); }
+}
+
+@keyframes ai-d-head {
+  0%, 50%, 100% { transform: translateY(2px) rotate(0deg); }
+  25% { transform: rotate(-9deg); }
+  75% { transform: rotate(9deg); }
+}
+
+/* Sign arm: waves the sign left and right across the bar. */
+@keyframes ai-d-upper-r {
+  0%, 50%, 100% { transform: rotate(-150deg); }
+  25% { transform: rotate(-138deg); }
+  75% { transform: rotate(-162deg); }
+}
+
+@keyframes ai-d-fore-r {
+  0%, 50%, 100% { transform: rotate(-32deg); }
+  25% { transform: rotate(-58deg); }
+  75% { transform: rotate(-4deg); }
+}
+
+/* Free arm: grooves on beats 1 to 3, fist pump on beat 4. */
+@keyframes ai-d-upper-l {
+  0%, 25%, 50%, 100% { transform: rotate(32deg); }
+  12.5%, 37.5% { transform: rotate(20deg); }
+  62.5% { transform: rotate(135deg); }
+  75% { transform: rotate(160deg); }
+  87.5% { transform: rotate(70deg); }
+}
+
+@keyframes ai-d-fore-l {
+  0%, 25%, 50%, 100% { transform: rotate(-105deg); }
+  12.5%, 37.5% { transform: rotate(-65deg); }
+  62.5% { transform: rotate(-40deg); }
+  75% { transform: rotate(-8deg); }
+  87.5% { transform: rotate(-80deg); }
+}
+
+.ai-dancer-note {
+  position: absolute;
+  top: 10%;
+  right: -6px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #00ffd0;
+  text-shadow: 0 0 8px #00ffd0;
+  animation: ai-dancer-note 2s ease-out infinite;
+}
+
+.ai-dancer-note--late {
+  right: auto;
+  left: -4px;
+  color: #ffe600;
+  text-shadow: 0 0 8px #ffe600;
+  animation-delay: -1s;
+}
+
+@keyframes ai-dancer-walk {
+  from { transform: translateX(8px); }
+  to { transform: translateX(calc(100vw - var(--dancer-w) - 24px)); }
+}
+
+@keyframes ai-dancer-note {
+  0% { transform: translateY(0) rotate(0); opacity: 0; }
+  20% { opacity: 1; }
+  100% { transform: translateY(-50px) rotate(25deg); opacity: 0; }
+}
+
+@keyframes ai-dancer-spin {
+  to { transform: rotateY(360deg) scale(1.15); }
+}
+
+/* Reduced motion: keep the joke, drop the movement. */
+@media (prefers-reduced-motion: reduce) {
+  :root.ai body::before,
+  :root.ai h1,
+  :root.ai .row,
+  .ai-token,
+  .ai-badge,
+  .ai-ticker,
+  .ai-ticker-track,
+  .ai-banner,
+  .ai-agi,
+  .ai-dancer-track,
+  .ai-dancer-svg [class],
+  .ai-dancer-note {
+    animation: none;
+  }
+}
