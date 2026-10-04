@@ -1,7 +1,6 @@
 import { links, profile, sections } from "../content";
 import useActiveSection from "../hooks/useActiveSection";
 import { GitHubIcon, LinkedInIcon } from "./Icons";
-import Location from "./Location";
 import ThemeToggle from "./ThemeToggle";
 
 const sectionIds = sections.map((section) => section.id);
@@ -19,7 +18,7 @@ const Sidebar = () => {
         <p className='mt-4 max-w-xs text-lg leading-snug text-soft'>
           {profile.tagline}
         </p>
-        <Location />
+        <p className='mt-3 text-sm text-muted'>{profile.location}</p>
 
         <nav aria-label='Sections' className='mt-16 hidden lg:block'>
           <ul>

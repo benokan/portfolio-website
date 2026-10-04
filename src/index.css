@@ -132,26 +132,6 @@ body {
   color: var(--accent);
 }
 
-/* Location line: a small wink on hover. */
-.location {
-  cursor: default;
-  transition: color 150ms;
-}
-
-.flag {
-  border-radius: 2px;
-  box-shadow: 0 0 0 1px var(--line);
-  transition: transform 200ms ease;
-}
-
-.location:hover {
-  color: var(--text);
-}
-
-.location:hover .flag {
-  transform: rotate(-8deg) scale(1.1);
-}
-
 /* Experience and project rows */
 .row {
   position: relative;
@@ -262,5 +242,5 @@ body {
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .fade-in { animation: none; }
-  .row, .row-title, .arrow, .nav-line, .nav-link, .flag { transition: none; }
+  .row, .row-title, .arrow, .nav-line, .nav-link { transition: none; }
 }

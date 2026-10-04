@@ -2,7 +2,6 @@ export const profile = {
   name: "Benokan Kafkas",
   tagline: "Founding engineer and team lead at Credizen, building Zenso.",
   location: "Based in Rome, Italy",
-  locationSound: "/attenzione-pickpocket.mp3",
 };
 
 export const sections = [
